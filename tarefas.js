@@ -14,9 +14,27 @@ let tarefas = [
 const listaDeTarefasEl = document.querySelector("#lista-tarefas");
 listaDeTarefasEl.innerHTML = "";
 
+const botaoIncluirNovaTarefaEl = document.querySelector("#incluir-nova-tarefa");
+const nomeNovaTarefaEl = document.querySelector("#nova-tarefa-nome");
+const categoriaNovaTarefaEl = document.querySelector("#nova-tarefa-categoria");
+
 for(let tarefa of tarefas){
     insereTarefaNaPagina(tarefa);
 }
+
+botaoIncluirNovaTarefaEl.addEventListener("click", function (){
+    const novaTarefa = {
+        nome: `${nomeNovaTarefaEl.value}`,
+        categoria: `${categoriaNovaTarefaEl.value}`,
+        realizada: false
+    };
+
+    tarefas.push(novaTarefa);
+    insereTarefaNaPagina(novaTarefa);
+
+    nomeNovaTarefaEl.value = "";
+    nomeNovaTarefaEl.focus();
+});
 
 function insereTarefaNaPagina(tarefa){
     const tagTarefa = `<li class="item-tarefa categoria-${tarefa.categoria} ${tarefa.realizada === true ? "marcado" : ""}">${tarefa.nome}</li>`;
