@@ -18,6 +18,8 @@ const botaoIncluirNovaTarefaEl = document.querySelector("#incluir-nova-tarefa");
 const nomeNovaTarefaEl = document.querySelector("#nova-tarefa-nome");
 const categoriaNovaTarefaEl = document.querySelector("#nova-tarefa-categoria");
 
+const filtroDaCategoriaEl = document.querySelector("#filtro-de-categoria");
+
 for(let tarefa of tarefas){
     insereTarefaNaPagina(tarefa);
 }
@@ -34,6 +36,14 @@ botaoIncluirNovaTarefaEl.addEventListener("click", function (){
 
     nomeNovaTarefaEl.value = "";
     nomeNovaTarefaEl.focus();
+});
+
+filtroDaCategoriaEl.addEventListener("change", function (){
+    const tarefaEls = Array.from(listaDeTarefasEl.children);
+    tarefaEls.forEach(tarefa => tarefa.classList.remove("retido-no-filtro"));
+    
+    const tarefasRetidas = tarefaEls.filter(tarefa => !tarefa.classList.contains(`categoria-${filtroDaCategoriaEl.value}`));
+    tarefasRetidas.forEach(tarefa => tarefa.classList.add("retido-no-filtro"));
 });
 
 function insereTarefaNaPagina(tarefa){
