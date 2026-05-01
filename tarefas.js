@@ -42,8 +42,10 @@ filtroDaCategoriaEl.addEventListener("change", function (){
     const tarefaEls = Array.from(listaDeTarefasEl.children);
     tarefaEls.forEach(tarefa => tarefa.classList.remove("retido-no-filtro"));
     
-    const tarefasRetidas = tarefaEls.filter(tarefa => !tarefa.classList.contains(`categoria-${filtroDaCategoriaEl.value}`));
-    tarefasRetidas.forEach(tarefa => tarefa.classList.add("retido-no-filtro"));
+    if(filtroDaCategoriaEl.value !== ""){
+        const tarefasRetidas = tarefaEls.filter(tarefa => !tarefa.classList.contains(`categoria-${filtroDaCategoriaEl.value}`));
+        tarefasRetidas.forEach(tarefa => tarefa.classList.add("retido-no-filtro"));
+    }
 });
 
 function insereTarefaNaPagina(tarefa){
