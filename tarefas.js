@@ -42,6 +42,15 @@ filtroDaCategoriaEl.addEventListener("change", function (){
     }
 });
 
+listaDeTarefasEl.addEventListener("click", function (event){
+    event.target.classList.toggle("marcado");
+    for(let tarefa of tarefas){
+        if(tarefa.nome === event.target.innerHTML){
+            tarefa.realizada = !tarefa.realizada;
+        }
+    }
+});
+
 function adiconaNovaTarefa(){
     const novaTarefa = {
         nome: `${nomeNovaTarefaEl.value}`,
