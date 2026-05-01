@@ -24,18 +24,12 @@ for(let tarefa of tarefas){
     insereTarefaNaPagina(tarefa);
 }
 
-botaoIncluirNovaTarefaEl.addEventListener("click", function (){
-    const novaTarefa = {
-        nome: `${nomeNovaTarefaEl.value}`,
-        categoria: `${categoriaNovaTarefaEl.value}`,
-        realizada: false
-    };
+botaoIncluirNovaTarefaEl.addEventListener("click", adiconaNovaTarefa);
 
-    tarefas.push(novaTarefa);
-    insereTarefaNaPagina(novaTarefa);
-
-    nomeNovaTarefaEl.value = "";
-    nomeNovaTarefaEl.focus();
+nomeNovaTarefaEl.addEventListener("keyup", function (event){
+    if(event.key === "Enter"){
+        adiconaNovaTarefa();
+    }
 });
 
 filtroDaCategoriaEl.addEventListener("change", function (){
@@ -47,6 +41,20 @@ filtroDaCategoriaEl.addEventListener("change", function (){
         tarefasRetidas.forEach(tarefa => tarefa.classList.add("retido-no-filtro"));
     }
 });
+
+function adiconaNovaTarefa(){
+    const novaTarefa = {
+        nome: `${nomeNovaTarefaEl.value}`,
+        categoria: `${categoriaNovaTarefaEl.value}`,
+        realizada: false
+    };
+
+    tarefas.push(novaTarefa);
+    insereTarefaNaPagina(novaTarefa);
+
+    nomeNovaTarefaEl.value = "";
+    nomeNovaTarefaEl.focus();
+}
 
 function insereTarefaNaPagina(tarefa){
     const tagTarefa = `<li class="item-tarefa categoria-${tarefa.categoria} ${tarefa.realizada === true ? "marcado" : ""}">${tarefa.nome}</li>`;
